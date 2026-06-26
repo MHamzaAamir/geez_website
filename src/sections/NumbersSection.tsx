@@ -27,7 +27,7 @@ const stats: NumberBoxProps[] = [
 export default function NumbersSection() {
   return (
     <>
-      <section className="relative h-screen w-full overflow-hidden bg-[#000123]">
+      <section className="relative h-screen w-screen overflow-hidden bg-[#000123]">
         <div className="absolute top-0 right-0 translate-y-[-50%] translate-x-[50%] bg-[#D948FD] h-[80%] w-[80%] blur-[240px]"></div>
         <div className="section-container relative z-10 flex h-full items-center justify-between gap-14">
           <div className="w-1/2">
