@@ -1,7 +1,7 @@
 export default function HeroSection() {
   return (
     <>
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-screen overflow-hidden px-20">
         <video
           autoPlay
           muted
@@ -17,19 +17,12 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
-        <div className="relative z-10 flex h-full items-center">
-          <div className="mx-auto max-w-7xl px-6">
-            <h1 className="text-6xl font-bold text-white">
-              Build Amazing Products
-            </h1>
-
-            <p className="mt-6 max-w-xl text-lg text-white/90">
-              Beautiful websites powered by AI.
-            </p>
-
-            <button className="mt-8 rounded-lg bg-white px-6 py-3 text-black font-semibold">
-              Get Started
-            </button>
+        <div className="relative flex h-full z-10 items-center">
+          <div className="text-white">
+            <h1 className="text-5xl font-bold">ALL-IN-1 CREATIVE STUDIO</h1>
+            <h2 className="text-[32.5px] font-bold">
+              ANIMATION, GAME DESIGN, MARKETING
+            </h2>
           </div>
         </div>
       </section>
