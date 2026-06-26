@@ -53,10 +53,16 @@ export default function NumberBox({
 
   return (
     <div ref={boxRef}>
-      <div ref={figureRef} className="text-[150px] font-bold leading-none">
+      <div
+        ref={figureRef}
+        className="text-[150px] leading-none -mb-3 font-bebas-neue"
+      >
         0{symbol}
       </div>
-      <div className="pl-3" dangerouslySetInnerHTML={{ __html: text }} />
+      <div
+        className="pl-1 leading-none font-light"
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
     </div>
   );
 }

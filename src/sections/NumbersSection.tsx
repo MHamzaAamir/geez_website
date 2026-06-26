@@ -27,9 +27,9 @@ const stats: NumberBoxProps[] = [
 export default function NumbersSection() {
   return (
     <>
-      <section className="relative h-screen w-screen bg-[#000123] overflow-hidden px-20">
+      <section className="relative h-screen w-full overflow-hidden bg-[#000123]">
         <div className="absolute top-0 right-0 translate-y-[-50%] translate-x-[50%] bg-[#D948FD] h-[80%] w-[80%] blur-[240px]"></div>
-        <div className="relative not-last:w-full h-full z-10 flex items-center justify-between gap-14">
+        <div className="section-container relative z-10 flex h-full items-center justify-between gap-14">
           <div className="w-1/2">
             <h1 className="text-7xl">FULFIL ALL YOUR</h1>
             <h1 className="text-[63.5px] font-bold">CREATIVE DREAMS</h1>
@@ -42,7 +42,7 @@ export default function NumbersSection() {
             </p>
           </div>
           <div className="w-1/2">
-            <div className="grid grid-cols-2 grid-rows-2 gap-24">
+            <div className="grid grid-cols-2 grid-rows-2 gap-40">
               {stats.map((stat) => (
                 <NumberBox
                   key={stat.figure}

@@ -10,6 +10,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-afacad-flux: var(--font-afacad-flux);
+  --font-bebas-neue: var(--font-bebas-neue);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +25,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-afacad-flux), Arial, Helvetica, sans-serif;
+}
+
+.section-container {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
 }

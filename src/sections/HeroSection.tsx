@@ -1,7 +1,7 @@
 export default function HeroSection() {
   return (
     <>
-      <section className="relative h-screen overflow-hidden px-20">
+      <section className="relative h-screen overflow-hidden">
         <video
           autoPlay
           muted
@@ -17,7 +17,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
-        <div className="relative flex h-full z-10 items-center">
+        <div className="section-container relative z-10 flex h-full items-center">
           <div className="text-white">
             <h1 className="text-6xl font-bold">ALL-IN-1 CREATIVE STUDIO</h1>
             <h2 className="text-[39.4px] font-bold">
