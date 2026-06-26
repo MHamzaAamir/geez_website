@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Afacad_Flux, Bebas_Neue } from "next/font/google";
+import "lenis/dist/lenis.css";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import "./globals.css";
 
 const afacadFlux = Afacad_Flux({
@@ -29,7 +31,9 @@ export default function RootLayout({
       lang="en"
       className={`${afacadFlux.variable} ${bebasNeue.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      </body>
     </html>
   );
 }
