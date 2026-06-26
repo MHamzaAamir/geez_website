@@ -1,0 +1,51 @@
+import { NumberBoxProps } from "@/types/NumberSectionTypes";
+
+function NumberBox({ figure, text }: NumberBoxProps) {
+  return (
+    <div>
+      <div className="text-[150px] font-bold leading-none">{figure}</div>
+      <div className="pl-3" dangerouslySetInnerHTML={{ __html: text }} />
+    </div>
+  );
+}
+
+const stats: NumberBoxProps[] = [
+  { figure: "300+", text: "SUCCESSFUL AND ACTIVE <br/> BRANDS AND PARTNERS" },
+  { figure: "90%", text: "PARTNER RETENTION RATE <br/> AND GROWTH SUCCESS" },
+  { figure: "10+", text: "YEARS OF CREATIVE AND <br/> TECHNICAL EXCELLENCE" },
+  { figure: "20+", text: "CREATIVE-HEADS AND TECH <br/> EXPERTS IN-HOUSE" },
+];
+
+export default function NumbersSection() {
+  return (
+    <>
+      <section className="relative h-screen w-screen bg-[#000123] overflow-hidden px-20">
+        <div className="absolute top-0 right-0 translate-y-[-50%] translate-x-[50%] bg-[#D948FD] h-[80%] w-[80%] blur-[240px]"></div>
+        <div className="relative not-last:w-full h-full z-10 flex items-center justify-between gap-14">
+          <div className="w-1/2">
+            <h1 className="text-7xl">FULFIL ALL YOUR</h1>
+            <h1 className="text-[63.5px] font-bold">CREATIVE DREAMS</h1>
+            <p className="text-lg">
+              We specialize in high quality, production level creative solutions
+              and scroll stopping visuals.
+              <br />
+              Our mission is to make your product stick in your customer&apos;s
+              mind by disrupting the pattern and producing premium content.
+            </p>
+          </div>
+          <div className="w-1/2">
+            <div className="grid grid-cols-2 grid-rows-2 gap-24">
+              {stats.map((stat) => (
+                <NumberBox
+                  key={stat.figure}
+                  figure={stat.figure}
+                  text={stat.text}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
