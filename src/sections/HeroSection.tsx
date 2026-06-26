@@ -19,8 +19,8 @@ export default function HeroSection() {
         {/* Content */}
         <div className="relative flex h-full z-10 items-center">
           <div className="text-white">
-            <h1 className="text-5xl font-bold">ALL-IN-1 CREATIVE STUDIO</h1>
-            <h2 className="text-[32.5px] font-bold">
+            <h1 className="text-6xl font-bold">ALL-IN-1 CREATIVE STUDIO</h1>
+            <h2 className="text-[39.4px] font-bold">
               ANIMATION, GAME DESIGN, MARKETING
             </h2>
           </div>
