@@ -1,1 +1,5 @@
-export type NumberBoxProps = { figure: string; text: string };
+export type NumberBoxProps = {
+  figure: number;
+  symbol?: string;
+  text: string;
+};

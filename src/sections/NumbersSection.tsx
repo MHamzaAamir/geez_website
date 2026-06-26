@@ -1,19 +1,27 @@
+import NumberBox from "@/components/NumberBox";
 import { NumberBoxProps } from "@/types/NumberSectionTypes";
 
-function NumberBox({ figure, text }: NumberBoxProps) {
-  return (
-    <div>
-      <div className="text-[150px] font-bold leading-none">{figure}</div>
-      <div className="pl-3" dangerouslySetInnerHTML={{ __html: text }} />
-    </div>
-  );
-}
-
 const stats: NumberBoxProps[] = [
-  { figure: "300+", text: "SUCCESSFUL AND ACTIVE <br/> BRANDS AND PARTNERS" },
-  { figure: "90%", text: "PARTNER RETENTION RATE <br/> AND GROWTH SUCCESS" },
-  { figure: "10+", text: "YEARS OF CREATIVE AND <br/> TECHNICAL EXCELLENCE" },
-  { figure: "20+", text: "CREATIVE-HEADS AND TECH <br/> EXPERTS IN-HOUSE" },
+  {
+    figure: 300,
+    symbol: "+",
+    text: "SUCCESSFUL AND ACTIVE <br/> BRANDS AND PARTNERS",
+  },
+  {
+    figure: 90,
+    symbol: "%",
+    text: "PARTNER RETENTION RATE <br/> AND GROWTH SUCCESS",
+  },
+  {
+    figure: 10,
+    symbol: "+",
+    text: "YEARS OF CREATIVE AND <br/> TECHNICAL EXCELLENCE",
+  },
+  {
+    figure: 20,
+    symbol: "+",
+    text: "CREATIVE-HEADS AND TECH <br/> EXPERTS IN-HOUSE",
+  },
 ];
 
 export default function NumbersSection() {
@@ -39,6 +47,7 @@ export default function NumbersSection() {
                 <NumberBox
                   key={stat.figure}
                   figure={stat.figure}
+                  symbol={stat.symbol}
                   text={stat.text}
                 />
               ))}
