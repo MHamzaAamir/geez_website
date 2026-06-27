@@ -9,8 +9,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <NumbersSection />
-      <ServicesSection />
-      <div className="h-screen"></div>
+      {/* <ServicesSection /> */}
     </>
   );
 }
