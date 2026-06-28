@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import CaseStudiesSection from "@/sections/CaseStudiesSection";
 import ClientSection from "@/sections/ClientSection";
 import FaqSection from "@/sections/FaqSection";
 import HeroSection from "@/sections/HeroSection";
@@ -14,6 +15,7 @@ export default function Home() {
       <ClientSection />
       {/* <ServicesSection /> */}
       <FaqSection />
+      <CaseStudiesSection />
       <div className="h-screen"></div>
     </>
   );
