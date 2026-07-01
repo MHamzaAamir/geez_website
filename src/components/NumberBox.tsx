@@ -55,7 +55,7 @@ export default function NumberBox({
     <div ref={boxRef}>
       <div
         ref={figureRef}
-        className="text-[150px] leading-none -mb-3 font-bebas-neue"
+        className="text-[70px] sm:text-[100px] lg:text-[150px] leading-none -mb-3 font-bebas-neue"
       >
         0{symbol}
       </div>

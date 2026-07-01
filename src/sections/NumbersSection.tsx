@@ -27,13 +27,17 @@ const stats: NumberBoxProps[] = [
 export default function NumbersSection() {
   return (
     <>
-      <section className="relative h-screen w-screen overflow-hidden bg-[#000123]">
+      <section className="relative min-h-screen w-screen overflow-hidden bg-[#000123] flex flex-col justify-center">
         <div className="absolute top-0 right-0 translate-y-[-50%] translate-x-[50%] bg-[#D948FD] h-[60%] w-[60%] blur-[230px]"></div>
-        <div className="section-container relative z-10 flex h-full items-center justify-between gap-14">
-          <div className="w-1/2">
-            <h1 className="text-7xl">FULFIL ALL YOUR</h1>
-            <h1 className="text-[63.5px] font-bold">CREATIVE DREAMS</h1>
-            <p className="text-lg">
+        <div className="section-container relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 py-16 lg:py-0">
+          <div className="w-full lg:w-1/2">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl">
+              FULFIL ALL YOUR
+            </h1>
+            <h1 className="text-4xl md:text-5xl lg:text-[63.5px] font-bold">
+              CREATIVE DREAMS
+            </h1>
+            <p className="text-base lg:text-lg">
               We specialize in high quality, production level creative solutions
               and scroll stopping visuals.
               <br />
@@ -41,8 +45,8 @@ export default function NumbersSection() {
               mind by disrupting the pattern and producing premium content.
             </p>
           </div>
-          <div className="w-1/2">
-            <div className="grid grid-cols-2 grid-rows-2 gap-40">
+          <div className="w-full lg:w-1/2">
+            <div className="grid grid-cols-2 grid-rows-2 gap-8 md:gap-16 lg:gap-40">
               {stats.map((stat) => (
                 <NumberBox
                   key={stat.figure}
