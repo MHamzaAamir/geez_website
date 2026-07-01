@@ -16,7 +16,7 @@ export default function AccordionItem({
         className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left text-white transition-colors hover:bg-white/6 sm:px-5 md:px-6"
       >
         <div className="flex items-center gap-3 md:gap-4">
-          <span className="h-10 w-1 rounded-full bg-[#D948FD] shadow-[0_0_20px_rgba(217,72,253,0.45)]" />
+          <span className="h-10 w-1 rounded-full bg-[#D948FD]" />
           <span className="text-sm font-medium leading-snug sm:text-base md:text-lg">
             {question}
           </span>
