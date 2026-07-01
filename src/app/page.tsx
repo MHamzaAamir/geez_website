@@ -14,8 +14,8 @@ export default function Home() {
       <NumbersSection />
       <ClientSection />
       {/* <ServicesSection /> */}
-      <FaqSection />
       <CaseStudiesSection />
+      <FaqSection />
       <div className="h-screen"></div>
     </>
   );
