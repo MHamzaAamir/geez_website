@@ -3,28 +3,28 @@ import { ClientCardProps } from "@/types/CaseStudiesSectionTypes";
 
 const cards: ClientCardProps[] = [
   {
-    text: "This is test string1",
-    image: "/hero-poster.jpg",
+    text: "HELPED THEM GROW THEIR ONLINE AUDIENCE WITH HIGH QUALITY CONTENT. PRODUCED LIVE ACTION + ANIMATED PROMOS AND ADS. BUILT THEIR VISUAL IDENTITY AND HELPED THEM CREATE A STRONG BRAND PRESENCE AS A PREMIUM PADEL FACILITY",
+    image: "/BOS.png",
   },
   {
     text: "This is test string2",
-    image: "/hero-poster.jpg",
+    image: "/L.png",
   },
   {
     text: "This is test string3",
-    image: "/hero-poster.jpg",
+    image: "/LM.png",
   },
   {
     text: "This is test string4",
-    image: "/hero-poster.jpg",
+    image: "/PP.png",
   },
   {
     text: "This is test string5",
-    image: "/hero-poster.jpg",
+    image: "/R.png",
   },
   {
-    text: "This is test string6",
-    image: "/hero-poster.jpg",
+    text: "HELPED THEM LAUNCH THEIR SaaS AI PRODUCT WITH AN ANIMATED STORY-STYLE AD, ALONG WITH SOCIAL CUTS EXPLAINING THEIR PRODUCT.",
+    image: "/S.png",
   },
 ];
 

@@ -63,14 +63,9 @@ export default function ClientCard({ image, text }: ClientCardProps) {
   return (
     <div
       ref={cardRef}
-      className="relative h-56 w-full max-w-86 overflow-hidden bg-red-600 top-right-bottom-left-clip cursor-pointer sm:h-62"
+      className="relative h-56 w-full max-w-86 overflow-hidden top-right-bottom-left-clip cursor-pointer sm:h-62"
     >
-      <Image
-        src="/hero-poster.jpg"
-        fill
-        alt="Card Image"
-        className="object-cover"
-      />
+      <Image src={image} fill alt="Card Image" className="object-cover" />
       <div
         ref={yellowRef}
         className="absolute inset-0 bg-[#FFE102] translate-y-full clip-shape-top-right"
@@ -80,8 +75,7 @@ export default function ClientCard({ image, text }: ClientCardProps) {
         className="absolute right-0 bottom-0 flex h-[34%] w-[88%] items-center px-3 sm:h-[30%] sm:w-[85%]"
       >
         <p className="text-xs leading-tight text-black sm:text-sm sm:leading-none">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam
-          voluptatum voluptate blanditiis. Eos quod eligendi nam.
+          {text}
         </p>
       </div>
     </div>
