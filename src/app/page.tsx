@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import BookingSection from "@/sections/BookingSection";
 import CaseStudiesSection from "@/sections/CaseStudiesSection";
 import ClientSection from "@/sections/ClientSection";
 import FaqSection from "@/sections/FaqSection";
@@ -17,7 +18,7 @@ export default function Home() {
       {/* <ServicesSection /> */}
       <CaseStudiesSection />
       <FaqSection />
-      <div className="h-screen bg-linear-to-b from-[#000123] to-[#782995]"></div>
+      <BookingSection />
       <FooterSection />
     </>
   );
