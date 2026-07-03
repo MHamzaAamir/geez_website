@@ -60,8 +60,7 @@ export default function ServicesSection() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (prefersReducedMotion) {
-      listViewport.style.overflowY = "auto";
+    if (window.innerWidth < 768) {
       return;
     }
 
@@ -69,15 +68,22 @@ export default function ServicesSection() {
       const getScrollDistance = () =>
         Math.max(0, list.scrollHeight - listViewport.clientHeight);
 
+      gsap.set(list, { y: 0 });
+
       gsap.to(list, {
         y: () => -getScrollDistance(),
         ease: "none",
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${Math.max(window.innerHeight, getScrollDistance())}`,
+          end: () =>
+            `+=${Math.max(
+              window.innerHeight,
+              getScrollDistance() + window.innerHeight * 1.5,
+            )}`,
           scrub: true,
           pin: true,
+          pinSpacing: true,
           anticipatePin: 0,
           invalidateOnRefresh: true,
         },
@@ -90,43 +96,51 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <>
-      <section
-        ref={sectionRef}
-        className="relative w-screen bg-[#000123] text-white overflow-hidden"
-      >
-        <div className="flex h-full w-full flex-row">
-          <div className="w-full md:h-screen md:w-1/2">
-            <Image
-              src={"/bubzi_skateboard.webp"}
-              width={1200}
-              height={1200}
-              alt="Bubzi Skateboard"
-              className="h-full w-full object-contain md:object-cover"
-            />
+    <section
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-[#000123] text-white"
+    >
+      <div className="flex min-h-screen flex-col gap-10 py-14 md:grid md:min-h-screen md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:items-stretch md:gap-12 md:py-0">
+        <div className="relative aspect-4/5 overflow-hidden md:aspect-auto md:min-h-screen">
+          <Image
+            src="/bubzi_skateboard.webp"
+            fill
+            sizes="(min-width: 768px) 46vw, 100vw"
+            alt="Bubzi Skateboard"
+            className="object-cover object-center md:object-[center_20%]"
+            priority
+          />
+        </div>
+
+        <div className="flex min-h-0 flex-col md:h-screen md:justify-center md:py-12">
+          <div className="shrink-0 px-0">
+            <h1 className="text-5xl leading-none font-bold sm:text-6xl md:text-7xl">
+              EXPLORE OUR
+            </h1>
+            <h1 className="text-6xl leading-none font-bold sm:text-7xl md:text-[5.75rem]">
+              SERVICES
+            </h1>
           </div>
-          <div className="flex w-full flex-col px-6 py-12 md:h-screen md:w-1/2 md:px-0 md:pt-22 md:pb-0">
-            <div className="shrink-0">
-              <h1 className="text-5xl leading-none font-bold">EXPLORE OUR</h1>
-              <h1 className="text-7xl leading-none font-bold">SERVICES</h1>
-            </div>
+
+          <div
+            ref={listViewportRef}
+            className="min-h-0 flex-1 overflow-visible pt-8 md:h-[52vh] md:flex-none md:overflow-hidden md:pt-10 lg:h-[58vh]"
+          >
             <div
-              ref={listViewportRef}
-              className="min-h-0 flex-1 overflow-visible md:overflow-hidden"
+              ref={listRef}
+              className="space-y-8 pb-16 md:space-y-10 md:pb-24 lg:pb-32"
             >
-              <div ref={listRef} className="pb-12 md:pb-[45vh]">
-                {services.map((service) => (
-                  <ServiceItem
-                    key={service.heading}
-                    heading={service.heading}
-                    description={service.description}
-                  />
-                ))}
-              </div>
+              {services.map((service) => (
+                <ServiceItem
+                  key={service.heading}
+                  heading={service.heading}
+                  description={service.description}
+                />
+              ))}
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
