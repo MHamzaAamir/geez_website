@@ -67,6 +67,7 @@ export default function ServicesSection() {
     const context = gsap.context(() => {
       const getScrollDistance = () =>
         Math.max(0, list.scrollHeight - listViewport.clientHeight);
+      const pinDistanceMultiplier = 0.4;
 
       gsap.set(list, { y: 0 });
 
@@ -77,10 +78,12 @@ export default function ServicesSection() {
           trigger: section,
           start: "top top",
           end: () =>
-            `+=${Math.max(
-              window.innerHeight,
-              getScrollDistance() + window.innerHeight * 1.5,
-            )}`,
+            `+=${
+              Math.max(
+                window.innerHeight,
+                getScrollDistance() + window.innerHeight * 1.5,
+              ) * pinDistanceMultiplier
+            }`,
           scrub: true,
           pin: true,
           pinSpacing: true,
