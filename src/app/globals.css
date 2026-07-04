@@ -64,6 +64,17 @@ body {
   );
 }
 
+.top-right-bottom-left-clip-hero {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 15px) 0,
+    100% 15px,
+    100% 100%,
+    15px 100%,
+    0 calc(100% - 15px)
+  );
+}
+
 .clip-shape-top-right {
   clip-path: polygon(
     0% 0%,
