@@ -126,7 +126,7 @@ export default function FooterSection() {
   }, []);
 
   return (
-    <section className="bg-[#000226] text-white">
+    <section className="bg-[#000226] text-white z-10 ">
       <div className="section-container py-10 sm:py-12 lg:py-14">
         <div className="grid items-stretch gap-10 md:grid-cols-2 md:gap-8 lg:gap-12">
           <div className="relative min-h-45 sm:min-h-55 md:min-h-65">

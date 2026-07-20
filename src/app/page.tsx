@@ -7,10 +7,12 @@ import FooterSection from "@/sections/FooterSection";
 import HeroSection from "@/sections/HeroSection";
 import NumbersSection from "@/sections/NumbersSection";
 import ServicesSection from "@/sections/ServicesSection";
+import VideoBackground from "@/sections/VideoBackground";
 
 export default function Home() {
   return (
     <>
+      <VideoBackground />
       <Navbar />
       <HeroSection />
       <NumbersSection />
@@ -19,6 +21,8 @@ export default function Home() {
       <CaseStudiesSection />
       <FaqSection />
       <BookingSection />
+      <section className="relative z-10 min-h-screen bg-transparent" />
+
       <FooterSection />
     </>
   );

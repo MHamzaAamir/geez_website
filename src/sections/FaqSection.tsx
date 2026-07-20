@@ -45,7 +45,7 @@ export default function FaqSection() {
   const right = faqs.filter((f) => f.side === "right");
 
   return (
-    <section className="w-screen bg-[#000123]">
+    <section className="w-screen bg-[#000123] z-10 ">
       <div className="section-container flex h-full flex-col py-12 md:py-16 lg:py-20">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-6xl font-bold sm:text-7xl md:text-8xl lg:text-[150px]">

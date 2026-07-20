@@ -1,27 +1,42 @@
+"use client";
 import Link from "next/link";
+import { useEffect } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const COMPANY_PROFILE_LINK =
     "https://drive.google.com/file/d/1NKoo4xqDd08AU5x3YL8EwYEiibCQ1bqS/view";
+
+  useEffect(() => {
+    // Animate hero text sliding up
+    gsap.to(".hero-content", {
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top top",
+        end: "bottom 50%",
+        scrub: 1,
+        markers: false,
+      },
+      y: -100,
+      opacity: 0.85,
+      duration: 1,
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <>
-      <section className="relative min-h-screen w-screen overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/hero-poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="/hero-video.webm" type="video/webm" />
-        </video>
+      <section className="relative">
+        {/* Video Container - This stays sticky */}
 
-        <div className="absolute inset-0 bg-black/50" />
-
-        {/* Content */}
-        <div className="section-container relative z-10 flex min-h-screen flex-col px-4 py-8 sm:px-6 sm:py-10 md:py-12">
+        {/* Hero Content - Slides up */}
+        <div className="hero-content relative z-10 min-h-screen w-screen flex flex-col px-4 py-8 sm:px-6 sm:py-10 md:py-12">
           <div className="flex flex-1 items-center justify-start text-left">
             <div className="w-full max-w-5xl text-white">
               <h1 className="text-3xl leading-tight font-bold sm:text-5xl md:text-6xl">
