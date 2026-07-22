@@ -6,18 +6,6 @@ export default function HeroSection() {
   return (
     <>
       <section className="relative min-h-screen w-screen overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster="/hero-poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="/hero-video.webm" type="video/webm" />
-        </video>
-
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}

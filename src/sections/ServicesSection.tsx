@@ -143,7 +143,7 @@ export default function ServicesSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#000123] text-white"
+      className="relative w-full overflow-hidden bg-[#000123] text-white z-10"
     >
       <div className="flex min-h-screen flex-col gap-10 py-14 md:grid md:min-h-screen md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:items-stretch md:gap-12 md:py-0">
         <div
