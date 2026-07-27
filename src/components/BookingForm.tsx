@@ -10,10 +10,56 @@ export default function BookingForm() {
     message: "",
   });
 
+  // async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+
+  //   const formData = new FormData(event.currentTarget);
+  //   const payload = {
+  //     name: String(formData.get("name") ?? "").trim(),
+  //     email: String(formData.get("email") ?? "").trim(),
+  //     message: String(formData.get("message") ?? "").trim(),
+  //   };
+
+  //   setIsSubmitting(true);
+  //   setStatus({ type: "idle", message: "" });
+
+  //   try {
+  //     const response = await fetch("/api/booking", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(payload),
+  //     });
+
+  //     const data = (await response.json()) as { message?: string };
+
+  //     if (!response.ok) {
+  //       setStatus({
+  //         type: "error",
+  //         message: data.message ?? "Could not submit form. Please try again.",
+  //       });
+  //       return;
+  //     }
+
+  //     event.currentTarget.reset();
+  //     setStatus({
+  //       type: "success",
+  //       message: data.message ?? "Thanks! Your request has been submitted.",
+  //     });
+  //   } catch {
+  //     setStatus({
+  //       type: "error",
+  //       message: "Network error. Please check your connection and retry.",
+  //     });
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // }
   async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget; // ✅ capture it early, synchronously
+
+    const formData = new FormData(form);
     const payload = {
       name: String(formData.get("name") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
@@ -40,7 +86,7 @@ export default function BookingForm() {
         return;
       }
 
-      event.currentTarget.reset();
+      form.reset(); // ✅ use the saved reference, not event.currentTarget
       setStatus({
         type: "success",
         message: data.message ?? "Thanks! Your request has been submitted.",
@@ -54,7 +100,6 @@ export default function BookingForm() {
       setIsSubmitting(false);
     }
   }
-
   return (
     <form className="w-full space-y-4" onSubmit={handleSubmit}>
       <div>
