@@ -6,7 +6,9 @@ export default function VideoBackground() {
         muted
         loop
         playsInline
-        className="h-full w-full object-cover"
+        preload="auto"
+        poster="/hero-poster.jpg"
+        className="absolute inset-0 h-full w-full object-cover"
       >
         <source src="/hero-video.webm" type="video/webm" />
       </video>
