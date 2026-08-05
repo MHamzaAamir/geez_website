@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import BookingSection from "@/sections/BookingSection";
 import CaseStudiesSection from "@/sections/CaseStudiesSection";
+import SpacerSection from "@/sections/SpacerSection";
 import ClientSection from "@/sections/ClientSection";
 import FaqSection from "@/sections/FaqSection";
 import FooterSection from "@/sections/FooterSection";
@@ -21,8 +22,7 @@ export default function Home() {
       <CaseStudiesSection />
       <FaqSection />
       <BookingSection />
-      <section className="relative z-10 min-h-screen bg-transparent" />
-
+      <SpacerSection />
       <FooterSection />
     </>
   );
