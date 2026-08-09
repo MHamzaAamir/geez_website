@@ -1,8 +1,12 @@
 import Link from "next/link";
 
 export default function HeroSection() {
-  const COMPANY_PROFILE_LINK =
-    "https://drive.google.com/file/d/1NKoo4xqDd08AU5x3YL8EwYEiibCQ1bqS/view";
+  const CALENDLY_LINK =
+    process.env.CALENDLY_LINK ??
+    "https://calendly.com/ghufran-geezcreationz/30min";
+  const SHOW_REEL_LINK =
+    process.env.SHOW_REEL_LINK ?? "https://www.youtube.com/watch?v=a0wMh-TCjYE";
+
   return (
     <>
       <section className="relative min-h-screen w-screen overflow-hidden">
@@ -23,17 +27,18 @@ export default function HeroSection() {
 
           <div className="flex w-full flex-col gap-3 pb-2 sm:flex-row sm:justify-between sm:gap-4 sm:pb-4">
             <Link
-              href={COMPANY_PROFILE_LINK}
+              href={SHOW_REEL_LINK}
               target="_blank"
               className="top-right-bottom-left-clip-hero w-full bg-[#A036C5] px-8 py-4 text-center text-lg font-semibold tracking-wide text-white sm:w-auto sm:min-w-55 sm:px-10 sm:text-xl md:min-w-80 md:px-12 md:py-4 md:text-2xl lg:min-w-96"
             >
-              COMPANY PROFILE
+              WATCH SHOW REEL
             </Link>
             <Link
-              href="/hero-video.webm"
+              href={CALENDLY_LINK}
+              target="_blank"
               className="top-right-bottom-left-clip-hero w-full bg-[#FFE500] px-8 py-4 text-center text-lg font-semibold tracking-wide text-black sm:w-auto sm:min-w-55 sm:px-10 sm:text-xl md:min-w-80 md:px-12 md:py-4 md:text-2xl lg:min-w-96"
             >
-              WATCH SHOW REEL
+              DISCUSS YOUR PROJECT
             </Link>
           </div>
         </div>
