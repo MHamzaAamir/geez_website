@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import BookingSection from "@/sections/BookingSection";
 import CaseStudiesSection from "@/sections/CaseStudiesSection";
+import DisruptPatternSection from "@/sections/DisruptPatternSection";
 import SpacerSection from "@/sections/SpacerSection";
 import ClientSection from "@/sections/ClientSection";
 import FaqSection from "@/sections/FaqSection";
@@ -20,6 +21,7 @@ export default function Home() {
       <ClientSection />
       <ServicesSection />
       <CaseStudiesSection />
+      <DisruptPatternSection />
       <FaqSection />
       <BookingSection />
       <SpacerSection />
