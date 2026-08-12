@@ -23,6 +23,11 @@ export default function DashboardLayout({
       }
     }
     checkSession();
+
+    document.documentElement.style.scrollbarGutter = "stable";
+    return () => {
+      document.documentElement.style.scrollbarGutter = "";
+    };
   }, [router]);
 
   async function handleLogout() {
