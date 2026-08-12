@@ -30,7 +30,7 @@ const cards: ClientCardProps[] = [
 
 export default function CaseStudiesSection() {
   return (
-    <section className="w-screen bg-[#000123] z-10 ">
+    <section className="w-full bg-[#000123] z-10 ">
       <div className="section-container flex h-full flex-col py-14 md:py-20">
         <div className="flex flex-col items-center">
           <h1 className="text-4xl text-center sm:text-5xl md:text-7xl">

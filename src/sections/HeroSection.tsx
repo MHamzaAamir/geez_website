@@ -9,7 +9,7 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative min-h-screen w-screen overflow-hidden">
+      <section className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}

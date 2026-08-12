@@ -2,7 +2,7 @@ import LogoMarquee from "@/components/LogoMarquee";
 
 export default function ClientSection() {
   return (
-    <section className="w-screen z-10 ">
+    <section className="w-full z-10 ">
       <div className="flex flex-col bg-[#000123] gap-2 py-4 px-3 sm:px-6 md:px-8">
         {/* First Heading */}
         <div className="flex items-center gap-3 sm:gap-6 md:gap-10">

@@ -3,7 +3,7 @@ import BookingForm from "../components/BookingForm";
 
 export default function BookingSection() {
   return (
-    <section className="w-screen bg-linear-to-b from-[#000123] to-[#782995] py-10 text-white md:py-32 z-10 ">
+    <section className="w-full bg-linear-to-b from-[#000123] to-[#782995] py-10 text-white md:py-32 z-10 ">
       <div className="section-container">
         <div className="grid min-h-[80vh] grid-cols-1 overflow-hidden md:grid-cols-2">
           <div className="relative min-h-80 md:min-h-full">

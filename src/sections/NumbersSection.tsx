@@ -27,7 +27,7 @@ const stats: NumberBoxProps[] = [
 export default function NumbersSection() {
   return (
     <>
-      <section className="relative min-h-screen w-screen overflow-hidden bg-[#000123] flex flex-col justify-center z-10 ">
+      <section className="relative min-h-screen w-full overflow-hidden bg-[#000123] flex flex-col justify-center z-10 ">
         <div className="absolute top-0 right-0 translate-y-[-50%] translate-x-[50%] bg-[#D948FD] h-[60%] w-[60%] blur-[230px]"></div>
         <div className="section-container relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 py-16 lg:py-0">
           <div className="w-full lg:w-1/2">

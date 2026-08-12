@@ -1,6 +1,6 @@
 export default function DisruptPatternSection() {
   return (
-    <section className="relative z-10 min-h-screen w-screen overflow-hidden">
+    <section className="relative z-10 min-h-screen w-full overflow-hidden">
       <video
         autoPlay
         muted
