@@ -1,48 +1,12 @@
 import { NextResponse } from "next/server";
-import { google } from "googleapis";
+import { connectToDatabase } from "@/lib/mongodb";
+import { verifyToken } from "@/lib/jwt";
 
 type BookingPayload = {
   name?: string;
   email?: string;
   message?: string;
 };
-
-function getRequiredEnv(name: string) {
-  const value = process.env[name]?.trim();
-
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-
-  return value;
-}
-
-async function appendBookingRow(name: string, email: string, message: string) {
-  const clientEmail = getRequiredEnv("GOOGLE_SHEETS_CLIENT_EMAIL");
-  const privateKey = getRequiredEnv("GOOGLE_SHEETS_PRIVATE_KEY").replace(
-    /\\n/g,
-    "\n",
-  );
-  const spreadsheetId = getRequiredEnv("GOOGLE_SHEETS_SPREADSHEET_ID");
-  const sheetName = process.env.GOOGLE_SHEETS_SHEET_NAME?.trim() || "Sheet1";
-
-  const auth = new google.auth.JWT({
-    email: clientEmail,
-    key: privateKey,
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  });
-
-  const sheets = google.sheets({ version: "v4", auth });
-
-  await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range: `${sheetName}!A:C`,
-    valueInputOption: "USER_ENTERED",
-    requestBody: {
-      values: [[name, email, message]],
-    },
-  });
-}
 
 export async function POST(request: Request) {
   try {
@@ -59,7 +23,14 @@ export async function POST(request: Request) {
       );
     }
 
-    await appendBookingRow(name, email, message);
+    const { db } = await connectToDatabase();
+
+    await db.collection("bookings").insertOne({
+      name,
+      email,
+      message,
+      createdAt: new Date(),
+    });
 
     return NextResponse.json(
       { message: "Booking request received successfully." },
@@ -76,6 +47,70 @@ export async function POST(request: Request) {
             : "Could not save booking request.",
       },
       { status: error instanceof SyntaxError ? 400 : 500 },
+    );
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const cookie = request.headers
+      .get("cookie")
+      ?.split("; ")
+      .find((c) => c.startsWith("admin_token="));
+
+    if (!cookie) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const token = cookie.split("=")[1];
+    const payload = await verifyToken(token);
+    if (!payload) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+    const limit = Math.min(
+      50,
+      Math.max(1, parseInt(searchParams.get("limit") || "10", 10)),
+    );
+    const skip = (page - 1) * limit;
+    const search = searchParams.get("search")?.trim() || "";
+
+    const { db } = await connectToDatabase();
+
+    const filter = search
+      ? {
+          $or: [
+            { name: { $regex: search, $options: "i" } },
+            { email: { $regex: search, $options: "i" } },
+            { message: { $regex: search, $options: "i" } },
+          ],
+        }
+      : {};
+
+    const [bookings, total] = await Promise.all([
+      db
+        .collection("bookings")
+        .find(filter)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .toArray(),
+      db.collection("bookings").countDocuments(filter),
+    ]);
+
+    return NextResponse.json({
+      bookings,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    });
+  } catch (error) {
+    console.error("Failed to fetch bookings", error);
+    return NextResponse.json(
+      { message: "Could not fetch bookings." },
+      { status: 500 },
     );
   }
 }

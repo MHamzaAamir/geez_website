@@ -1,6 +1,6 @@
 "use client";
 
-import { SubmitEvent, useState } from "react";
+import { type SyntheticEvent, useState } from "react";
 import { FormStatus } from "@/types/BookingSectionTypes";
 
 export default function BookingForm() {
@@ -10,10 +10,11 @@ export default function BookingForm() {
     message: "",
   });
 
-  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const payload = {
       name: String(formData.get("name") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
@@ -40,7 +41,7 @@ export default function BookingForm() {
         return;
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setStatus({
         type: "success",
         message: data.message ?? "Thanks! Your request has been submitted.",
@@ -48,7 +49,7 @@ export default function BookingForm() {
     } catch {
       setStatus({
         type: "error",
-        message: "Network error. Please check your connection and retry.",
+        message: "Could not submit form. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
