@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Mail,
   Search,
+  Trash2,
 } from "lucide-react";
 
 interface Booking {
@@ -53,6 +54,7 @@ export default function BookingsPage() {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [page, setPage] = useState(1);
+  const firstFetch = useRef(true);
 
   const fetchBookings = useCallback(
     async (p: number, q: string, initial: boolean) => {
@@ -82,8 +84,6 @@ export default function BookingsPage() {
     [router],
   );
 
-  const firstFetch = useRef(true);
-
   useEffect(() => {
     fetchBookings(page, debouncedSearch, firstFetch.current);
     firstFetch.current = false;
@@ -101,125 +101,179 @@ export default function BookingsPage() {
   const total = data?.total ?? 0;
   const totalPages = data?.totalPages ?? 0;
 
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  async function handleDelete(id: string) {
+    setDeleteId(id);
+  }
+
+  async function confirmDelete() {
+    if (!deleteId) return;
+    const res = await fetch(`/api/booking?id=${deleteId}`, {
+      method: "DELETE",
+    });
+    setDeleteId(null);
+    if (res.ok) {
+      fetchBookings(page, debouncedSearch, false);
+    }
+  }
+
   return (
-    <div className="max-w-4xl">
-      <Link
-        href="/admin/dashboard"
-        className="mb-6 inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to Dashboard
-      </Link>
+    <>
+      <div className="max-w-4xl">
+        <Link
+          href="/admin/dashboard"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Dashboard
+        </Link>
 
-      <div className="mb-8 space-y-1">
-        <h2 className="text-2xl font-bold tracking-tight">Bookings</h2>
-        <p className="text-sm text-neutral-500">
-          {total} booking{total !== 1 && "s"} received
-        </p>
-      </div>
-
-      <div className="mb-6">
-        <div className="relative">
-          {fetching ? (
-            <div className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin rounded-full border-2 border-neutral-600 border-t-white" />
-          ) : (
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
-          )}
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by name, email, or message..."
-            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-neutral-500 focus:border-neutral-600 focus:outline-none transition-colors"
-          />
-        </div>
-      </div>
-
-      {loading && !data ? (
-        <div className="flex items-center justify-center py-20">
-          <div className="h-5 w-5 animate-spin rounded-full border-2 border-neutral-600 border-t-white" />
-        </div>
-      ) : bookings.length === 0 ? (
-        <div className="rounded-xl border border-neutral-800 py-20 text-center">
+        <div className="mb-8 space-y-1">
+          <h2 className="text-2xl font-bold tracking-tight">Bookings</h2>
           <p className="text-sm text-neutral-500">
-            {debouncedSearch
-              ? "No bookings match your search."
-              : "No bookings yet."}
+            {total} booking{total !== 1 && "s"} received
           </p>
         </div>
-      ) : (
-        <>
-          <div className="space-y-3">
-            {bookings.map((booking) => (
-              <div
-                key={booking._id}
-                className="rounded-xl border border-neutral-800 bg-neutral-900/60 p-5 transition-colors hover:border-neutral-700 hover:bg-neutral-900"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-800 text-sm font-semibold text-neutral-300 uppercase">
-                    {booking.name.charAt(0)}
-                  </div>
 
-                  <div className="min-w-0 flex-1 space-y-2">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="font-medium text-white truncate">
-                          {booking.name}
-                        </p>
-                        <div className="mt-0.5 flex items-center gap-1.5 text-xs text-neutral-500">
-                          <Mail className="h-3 w-3 shrink-0" />
-                          <span className="truncate">{booking.email}</span>
-                        </div>
-                      </div>
-                      <span className="shrink-0 pt-0.5 text-xs text-neutral-600">
-                        {timeAgo(booking.createdAt)}
-                      </span>
+        <div className="mb-6">
+          <div className="relative">
+            {fetching ? (
+              <div className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin rounded-full border-2 border-neutral-600 border-t-white" />
+            ) : (
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+            )}
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by name, email, or message..."
+              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-neutral-500 focus:border-neutral-600 focus:outline-none transition-colors"
+            />
+          </div>
+        </div>
+
+        {loading && !data ? (
+          <div className="flex items-center justify-center py-20">
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-neutral-600 border-t-white" />
+          </div>
+        ) : bookings.length === 0 ? (
+          <div className="rounded-xl border border-neutral-800 py-20 text-center">
+            <p className="text-sm text-neutral-500">
+              {debouncedSearch
+                ? "No bookings match your search."
+                : "No bookings yet."}
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="space-y-3">
+              {bookings.map((booking) => (
+                <div
+                  key={booking._id}
+                  className="rounded-xl border border-neutral-800 bg-neutral-900/60 p-5 transition-colors hover:border-neutral-700 hover:bg-neutral-900"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-800 text-sm font-semibold text-neutral-300 uppercase">
+                      {booking.name.charAt(0)}
                     </div>
 
-                    <p className="text-sm leading-relaxed text-neutral-400">
-                      {booking.message}
-                    </p>
+                    <div className="min-w-0 flex-1 space-y-2">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="font-medium text-white truncate">
+                            {booking.name}
+                          </p>
+                          <div className="mt-0.5 flex items-center gap-1.5 text-xs text-neutral-500">
+                            <Mail className="h-3 w-3 shrink-0" />
+                            <span className="truncate">{booking.email}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs text-neutral-600">
+                            {timeAgo(booking.createdAt)}
+                          </span>
+                          <button
+                            onClick={() => handleDelete(booking._id)}
+                            className="text-neutral-600 hover:text-red-400 transition-colors cursor-pointer"
+                            title="Delete booking"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </div>
+
+                      <p className="text-sm leading-relaxed text-neutral-400">
+                        {booking.message}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {totalPages > 1 && (
-            <div className="mt-8 flex items-center justify-center gap-2">
-              <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page <= 1}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                <button
-                  key={p}
-                  onClick={() => setPage(p)}
-                  className={`inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm transition-colors ${
-                    p === page
-                      ? "border border-white text-white"
-                      : "border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white"
-                  }`}
-                >
-                  {p}
-                </button>
               ))}
+            </div>
 
+            {totalPages > 1 && (
+              <div className="mt-8 flex items-center justify-center gap-2">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page <= 1}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (p) => (
+                    <button
+                      key={p}
+                      onClick={() => setPage(p)}
+                      className={`inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm transition-colors ${
+                        p === page
+                          ? "border border-white text-white"
+                          : "border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white"
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ),
+                )}
+
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page >= totalPages}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      {deleteId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="w-full max-w-sm rounded-xl border border-neutral-700 bg-neutral-900 p-6 shadow-2xl">
+            <p className="text-sm text-neutral-200">
+              Are you sure you want to delete this booking?
+            </p>
+            <div className="mt-5 flex justify-end gap-3">
               <button
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={page >= totalPages}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                onClick={() => setDeleteId(null)}
+                className="rounded-lg border border-neutral-700 px-4 py-2 text-sm text-neutral-300 hover:bg-neutral-800 transition-colors"
               >
-                <ChevronRight className="h-4 w-4" />
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500 transition-colors"
+              >
+                Delete
               </button>
             </div>
-          )}
-        </>
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 }

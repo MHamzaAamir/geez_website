@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import { verifyToken } from "@/lib/jwt";
+import { ObjectId } from "mongodb";
 
 type BookingPayload = {
   name?: string;
@@ -110,6 +111,56 @@ export async function GET(request: Request) {
     console.error("Failed to fetch bookings", error);
     return NextResponse.json(
       { message: "Could not fetch bookings." },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const cookie = request.headers
+      .get("cookie")
+      ?.split("; ")
+      .find((c) => c.startsWith("admin_token="));
+
+    if (!cookie) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const token = cookie.split("=")[1];
+    const payload = await verifyToken(token);
+    if (!payload) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "Booking ID is required." },
+        { status: 400 },
+      );
+    }
+
+    const { db } = await connectToDatabase();
+
+    const result = await db
+      .collection("bookings")
+      .deleteOne({ _id: new ObjectId(id) });
+
+    if (result.deletedCount === 0) {
+      return NextResponse.json(
+        { message: "Booking not found." },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json({ message: "Booking deleted." });
+  } catch (error) {
+    console.error("Failed to delete booking", error);
+    return NextResponse.json(
+      { message: "Could not delete booking." },
       { status: 500 },
     );
   }
