@@ -1,46 +1,27 @@
 import Image from "next/image";
 import AccordionItem from "@/components/AccordianItem";
+import { connectToDatabase } from "@/lib/mongodb";
+import type { Faq } from "@/types/FaqTypes";
 
-const faqs = [
-  {
-    side: "left",
-    question: "What industries does Geez specialize in?",
-    answer:
-      "Geez works across tech, fintech, healthcare, and creative industries — delivering tailored digital solutions for each vertical.",
-  },
-  {
-    side: "left",
-    question: "How do I get started with Geez's services?",
-    answer:
-      "Simply reach out through our contact page or book a discovery call. Our team will walk you through the onboarding process.",
-  },
-  {
-    side: "left",
-    question: "What is the typical project timeline?",
-    answer:
-      "Timelines vary by scope, but most projects range from 4 to 12 weeks. We'll give you a clear estimate during the kickoff phase.",
-  },
-  {
-    side: "right",
-    question: "Do you offer ongoing support after launch?",
-    answer:
-      "Yes — we offer flexible retainer plans for maintenance, updates, and continuous improvements post-launch.",
-  },
-  {
-    side: "right",
-    question: "Can Geez handle both design and development?",
-    answer:
-      "Absolutely. We're a full-service team covering UX/UI design, frontend and backend development, and QA under one roof.",
-  },
-  {
-    side: "right",
-    question: "What does the pricing look like?",
-    answer:
-      "Pricing is project-based and tailored to your needs. We're transparent about costs upfront — no hidden fees.",
-  },
-];
+async function getFaqs(): Promise<Faq[]> {
+  try {
+    const { db } = await connectToDatabase();
 
-export default function FaqSection() {
+    const faqs = await db
+      .collection<Faq>("faqs")
+      .find({})
+      .sort({ order: 1 })
+      .toArray();
+
+    return faqs;
+  } catch (error) {
+    console.error("Failed to load FAQs", error);
+    return [];
+  }
+}
+
+export default async function FaqSection() {
+  const faqs = await getFaqs();
   const left = faqs.filter((f) => f.side === "left");
   const right = faqs.filter((f) => f.side === "right");
 

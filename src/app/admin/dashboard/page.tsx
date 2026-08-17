@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CalendarCheck, FileText } from "lucide-react";
+import { CalendarCheck, FileText, HelpCircle } from "lucide-react";
 
 const cards = [
   {
@@ -8,6 +8,14 @@ const cards = [
     icon: CalendarCheck,
     href: "/admin/dashboard/bookings",
     gradient: "from-emerald-500 to-teal-600",
+    available: true,
+  },
+  {
+    title: "FAQs",
+    description: "Edit the frequently asked questions shown on the site",
+    icon: HelpCircle,
+    href: "/admin/dashboard/faqs",
+    gradient: "from-sky-500 to-blue-600",
     available: true,
   },
   {
