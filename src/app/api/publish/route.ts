@@ -1,20 +1,10 @@
 import { NextResponse } from "next/server";
-import { verifyToken } from "@/lib/jwt";
+import { getSession } from "@/lib/session";
 
 export async function POST(request: Request) {
-  const cookie = request.headers
-    .get("cookie")
-    ?.split("; ")
-    .find((c) => c.startsWith("admin_token="));
+  const session = await getSession(request);
 
-  if (!cookie) {
-    return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
-  }
-
-  const token = cookie.split("=")[1];
-  const payload = await verifyToken(token);
-
-  if (!payload) {
+  if (!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
 

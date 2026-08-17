@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
-import { verifyToken } from "@/lib/jwt";
+import { getSession } from "@/lib/session";
 import { ObjectId } from "mongodb";
 
 type BookingPayload = {
@@ -54,18 +54,8 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   try {
-    const cookie = request.headers
-      .get("cookie")
-      ?.split("; ")
-      .find((c) => c.startsWith("admin_token="));
-
-    if (!cookie) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    }
-
-    const token = cookie.split("=")[1];
-    const payload = await verifyToken(token);
-    if (!payload) {
+    const session = await getSession(request);
+    if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
@@ -118,18 +108,8 @@ export async function GET(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const cookie = request.headers
-      .get("cookie")
-      ?.split("; ")
-      .find((c) => c.startsWith("admin_token="));
-
-    if (!cookie) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    }
-
-    const token = cookie.split("=")[1];
-    const payload = await verifyToken(token);
-    if (!payload) {
+    const session = await getSession(request);
+    if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
