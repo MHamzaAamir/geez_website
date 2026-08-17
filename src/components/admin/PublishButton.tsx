@@ -34,7 +34,10 @@ export default function PublishButton() {
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          setMessage("");
+          setOpen(true);
+        }}
         className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-neutral-700 px-4 py-1.5 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors"
       >
         <Rocket className="h-4 w-4" />
