@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import PublishButton from "@/components/admin/PublishButton";
 
 export default function DashboardLayout({
   children,
@@ -48,12 +49,15 @@ export default function DashboardLayout({
       <header className="sticky top-0 z-10 border-b border-neutral-800 bg-neutral-950/80 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <h1 className="text-lg font-bold tracking-tight">Dashboard</h1>
-          <button
-            onClick={handleLogout}
-            className="rounded-lg border border-neutral-700 px-4 py-1.5 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors"
-          >
-            Logout
-          </button>
+          <div className="flex items-center gap-3">
+            <PublishButton />
+            <button
+              onClick={handleLogout}
+              className="cursor-pointer rounded-lg border border-neutral-700 px-4 py-1.5 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-6 py-8">{children}</main>
