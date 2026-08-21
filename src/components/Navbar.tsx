@@ -31,12 +31,12 @@ export default function Navbar() {
       <nav className="fixed top-4 right-0 z-40 flex h-16 w-[96%] items-center bg-[#1D1D2B]/85 backdrop-blur-sm md:top-10 md:h-15 md:w-[95%]">
         <div className="absolute left-0 top-0 h-full w-1 bg-white/80" />
 
-        <div className="flex w-full items-center justify-between gap-4 px-4 sm:px-6 md:gap-10 md:px-8">
+        <div className="flex w-full items-center justify-between gap-4 px-4 sm:px-6 md:gap-32 md:px-10 text-lg">
           <Link href="/" onClick={closeSidebar}>
-            <Image src="/logo.png" alt="Logo" width={60} height={50} />
+            <Image src="/logo.png" alt="Logo" width={95} height={95} />
           </Link>
 
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-8 md:flex justify-between w-[90%] max-w-[1800px]">
             {links.map((link) => (
               <Link
                 key={link.name}
