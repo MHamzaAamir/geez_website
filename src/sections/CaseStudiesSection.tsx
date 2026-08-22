@@ -3,10 +3,12 @@ import { ClientCardProps } from "@/types/CaseStudiesSectionTypes";
 
 const cards: ClientCardProps[] = [
   {
+    title: "BIG O SOFT",
     text: `AUGMENTED OUR CREATIVE TEAM, HANDLED THEIR ANIMATION, EDITING AND POST PRODUCTION WORK ALONG WITH ASSET CREATION FOR GAMES AND THEOR CLIENTS.`,
     image: "/BOS.png",
   },
   {
+    title: "LIORA",
     text: `CREATED GAME ART, CHARACTER ANIMATION & GAME
 UI/UX. FROM WIREFRAME AND STORYBOARDS TO POST
 PRODUCTION AND VFX, WE GAVE OUR ALL TO THIS
@@ -14,6 +16,7 @@ AMAZING GAME.`,
     image: "/L.png",
   },
   {
+    title: "LAKE MERIT",
     text: `DIRECTED AND PRODUCED A SHORT-FILM TRAILER IN
 COLLABORATION WITH PEP FILM STUDIOS. SORTED THE
 FULL PROCESS FROM PRE-PROD, PRODUCTION UPTO
@@ -21,14 +24,17 @@ POST-PROD AND PUBLISHING.`,
     image: "/LM.png",
   },
   {
+    title: "PADEL PLUS",
     text: `HELPED GROW THEIR ONLINE AUDIENCE, PRODUCE PROMOTIONAL CONTENT, AND BUILD A PREMIUM BRAND IDENTITY FOR THEIR PADEL FACILITY.`,
     image: "/PP.png",
   },
   {
+    title: "RIBBIOT",
     text: "PRODUCED AN ANIMATED INTRO FOR THIS CONSTRUCTION AGENCY, SHOWCASING THEIR EXPERTISE AND SKILLS, WHICH HELPED THEM REACH A WIDER AUDIENCE AND CLIENT BASE.",
     image: "/R.png",
   },
   {
+    title: "SAPYGE",
     text: "HELPED THEM LAUNCH THEIR SAAS AI PRODUCT WITH AN ANIMATED STORY-STYLE AD, ALONG WITH SOCIAL CUTS EXPLAINING THEIR PRODUCT.",
     image: "/S.png",
   },
@@ -48,7 +54,12 @@ export default function CaseStudiesSection() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-6 py-8 sm:gap-8 md:gap-12 md:py-10">
           {cards.map((card) => (
-            <ClientCard key={card.text} text={card.text} image={card.image} />
+            <ClientCard
+              key={card.text}
+              text={card.text}
+              image={card.image}
+              title={card.title}
+            />
           ))}
         </div>
       </div>

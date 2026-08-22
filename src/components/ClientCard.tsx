@@ -5,22 +5,29 @@ import gsap from "gsap";
 import Image from "next/image";
 import { ClientCardProps } from "@/types/CaseStudiesSectionTypes";
 
-export default function ClientCard({ image, text }: ClientCardProps) {
+export default function ClientCard({ image, text, title }: ClientCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const yellowRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     const card = cardRef.current;
     const yellow = yellowRef.current;
     const text = textRef.current;
+    const title = titleRef.current;
 
-    if (!card || !yellow || !text) return;
+    if (!card || !yellow || !text || !title) return;
 
     gsap.set(text, {
       opacity: 0,
       y: 20,
+    });
+
+    gsap.set(title, {
+      opacity: 0,
+      y: 12,
     });
 
     tl.current = gsap.timeline({ paused: true });
@@ -40,6 +47,16 @@ export default function ClientCard({ image, text }: ClientCardProps) {
           ease: "power2.out",
         },
         "-=0.1",
+      )
+      .to(
+        title,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        "<",
       );
 
     const handleEnter = () => {
@@ -66,6 +83,14 @@ export default function ClientCard({ image, text }: ClientCardProps) {
       className="relative h-56 w-full max-w-86 overflow-hidden top-right-bottom-left-clip cursor-pointer sm:h-62"
     >
       <Image src={image} fill alt="Card Image" className="object-cover" />
+      <div
+        ref={titleRef}
+        className="absolute top-[50%] right-0 flex justify-center px-4"
+      >
+        <p className="font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] text-5xl tracking-tight">
+          {title}
+        </p>
+      </div>
       <div
         ref={yellowRef}
         className="absolute inset-0 bg-[#FFE102] translate-y-full clip-shape-top-right"
