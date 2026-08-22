@@ -10,6 +10,7 @@ export default function ClientCard({ image, text, title }: ClientCardProps) {
   const yellowRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const darkRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
@@ -17,8 +18,9 @@ export default function ClientCard({ image, text, title }: ClientCardProps) {
     const yellow = yellowRef.current;
     const text = textRef.current;
     const title = titleRef.current;
+    const dark = darkRef.current;
 
-    if (!card || !yellow || !text || !title) return;
+    if (!card || !yellow || !text || !title || !dark) return;
 
     gsap.set(text, {
       opacity: 0,
@@ -30,14 +32,27 @@ export default function ClientCard({ image, text, title }: ClientCardProps) {
       y: 12,
     });
 
+    gsap.set(dark, {
+      opacity: 0,
+    });
+
     tl.current = gsap.timeline({ paused: true });
 
     tl.current
-      .to(yellow, {
-        y: "55%",
+      .to(dark, {
+        opacity: 0.55,
         duration: 0.3,
         ease: "power2.out",
       })
+      .to(
+        yellow,
+        {
+          y: "55%",
+          duration: 0.3,
+          ease: "power2.out",
+        },
+        "<",
+      )
       .to(
         text,
         {
@@ -83,6 +98,7 @@ export default function ClientCard({ image, text, title }: ClientCardProps) {
       className="relative h-56 w-full max-w-86 overflow-hidden top-right-bottom-left-clip cursor-pointer sm:h-62"
     >
       <Image src={image} fill alt="Card Image" className="object-cover" />
+      <div ref={darkRef} className="absolute inset-0 bg-black" />
       <div
         ref={titleRef}
         className="absolute top-[50%] right-0 flex justify-center px-4"
