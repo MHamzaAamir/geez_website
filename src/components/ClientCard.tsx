@@ -97,7 +97,13 @@ export default function ClientCard({ image, text, title }: ClientCardProps) {
       ref={cardRef}
       className="relative h-56 w-full max-w-86 overflow-hidden top-right-bottom-left-clip cursor-pointer sm:h-62"
     >
-      <Image src={image} fill alt="Card Image" className="object-cover" />
+      <Image
+        src={image}
+        fill
+        alt="Card Image"
+        className="object-cover"
+        sizes="(max-width: 344px) 100vw, 344px"
+      />
       <div ref={darkRef} className="absolute inset-0 bg-black" />
       <div
         ref={titleRef}

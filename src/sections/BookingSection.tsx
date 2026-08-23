@@ -11,6 +11,7 @@ export default function BookingSection() {
               src="/NEAT.png"
               alt="Book a call"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-contain object-center"
               priority={false}
             />
