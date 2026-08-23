@@ -1,4 +1,3 @@
-import Image from "next/image";
 import AccordionItem from "@/components/AccordianItem";
 import { connectToDatabase } from "@/lib/mongodb";
 import type { Faq } from "@/types/FaqTypes";
@@ -36,13 +35,16 @@ export default async function FaqSection() {
 
         <div className="mt-8 flex flex-col gap-4 lg:hidden">
           <div className="mb-3 flex justify-center">
-            <Image
-              src="/bubzi_faq.webp"
-              height={400}
-              width={400}
-              alt="bubzi_faq"
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
               className="h-auto w-44 sm:w-56 md:w-64"
-            />
+            >
+              <source src="/bubzi_faq.webm" type="video/webm" />
+            </video>
           </div>
           {faqs.map((faq, i) => (
             <AccordionItem
@@ -65,13 +67,16 @@ export default async function FaqSection() {
           </div>
 
           <div className="flex justify-center">
-            <Image
-              src="/bubzi_faq.webp"
-              height={400}
-              width={400}
-              alt="bubzi_faq"
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
               className="h-auto w-80 xl:w-100"
-            />
+            >
+              <source src="/bubzi_faq.webm" type="video/webm" />
+            </video>
           </div>
 
           <div className="flex flex-col gap-6">
