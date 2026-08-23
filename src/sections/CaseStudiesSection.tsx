@@ -1,4 +1,4 @@
-import ClientCard from "@/components/ClientCard";
+import CaseStudiesMarquee from "@/components/CaseStudiesMarquee";
 import { ClientCardProps } from "@/types/CaseStudiesSectionTypes";
 
 const cards: ClientCardProps[] = [
@@ -52,16 +52,7 @@ export default function CaseStudiesSection() {
             CASE STUDIES
           </h1>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-6 py-8 sm:gap-8 md:gap-12 md:py-10">
-          {cards.map((card) => (
-            <ClientCard
-              key={card.text}
-              text={card.text}
-              image={card.image}
-              title={card.title}
-            />
-          ))}
-        </div>
+        <CaseStudiesMarquee cards={cards} />
       </div>
     </section>
   );
