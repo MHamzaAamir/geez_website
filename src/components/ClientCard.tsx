@@ -121,7 +121,7 @@ export default function ClientCard({ image, text, title }: ClientCardProps) {
         ref={textRef}
         className="absolute right-0 bottom-0 flex h-[34%] w-[88%] items-center px-3 sm:h-[30%] sm:w-[85%]"
       >
-        <p className="text-xs leading-tight text-black sm:text-sm sm:leading-none">
+        <p className="text-[11px] leading-tight text-black sm:text-sm sm:leading-none">
           {text}
         </p>
       </div>
