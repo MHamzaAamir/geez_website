@@ -31,12 +31,12 @@ export default function Navbar() {
       <nav className="fixed top-4 right-0 z-40 flex h-16 w-[96%] items-center bg-[#1D1D2B]/85 backdrop-blur-sm md:top-10 md:h-15 md:w-[95%]">
         <div className="absolute left-0 top-0 h-full w-1 bg-white/80" />
 
-        <div className="flex w-full items-center justify-between gap-4 px-4 sm:px-6 md:gap-32 md:px-10 text-lg">
+        <div className="flex w-full items-center justify-between gap-4 px-4 sm:px-6 md:gap-6 md:px-8 lg:gap-32 lg:px-10">
           <Link href="/" onClick={closeSidebar}>
-            <Image src="/logo.png" alt="Logo" width={95} height={95} />
+            <Image src="/logo.png" alt="Logo" width={95} height={58} />
           </Link>
 
-          <div className="hidden items-center gap-8 md:flex justify-between w-[90%] max-w-[1800px]">
+          <div className="hidden items-center justify-between md:flex md:w-[88%] lg:w-[90%] md:text-sm lg:text-lg lg:max-w-[1800px]">
             {links.map((link) => (
               <Link
                 key={link.name}
@@ -49,7 +49,7 @@ export default function Navbar() {
             <button className="top-right-bottom-left-clip-nav-buttons bg-white px-3 py-1 text-black">
               Contact Us
             </button>
-            <button className="top-right-bottom-left-clip-nav-buttons bg-[#A036C5] px-3 py-1">
+            <button className="top-right-bottom-left-clip-nav-buttons bg-[#A036C5] px-3 py-1 text-white">
               Book A Meet
             </button>
           </div>
@@ -111,7 +111,7 @@ export default function Navbar() {
           <button className="top-right-bottom-left-clip-nav-buttons bg-white px-4 py-2 text-black">
             Contact Us
           </button>
-          <button className="top-right-bottom-left-clip-nav-buttons bg-[#A036C5] px-4 py-2">
+          <button className="top-right-bottom-left-clip-nav-buttons bg-[#A036C5] px-4 py-2 text-white">
             Book A Meet
           </button>
         </div>
