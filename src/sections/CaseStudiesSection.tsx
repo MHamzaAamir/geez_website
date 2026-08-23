@@ -48,7 +48,7 @@ export default function CaseStudiesSection() {
           <h1 className="text-4xl text-center sm:text-5xl md:text-7xl">
             OUR CLIENTS &
           </h1>
-          <h1 className="text-4xl text-center font-bold sm:text-5xl md:text-[79px]">
+          <h1 className="text-4xl text-center font-bold sm:text-5xl md:text-[79px] text-[#A036C5] [text-shadow:0_0_18px_#A036C5]">
             CASE STUDIES
           </h1>
         </div>

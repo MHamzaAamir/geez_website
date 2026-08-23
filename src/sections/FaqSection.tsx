@@ -29,7 +29,7 @@ export default async function FaqSection() {
     <section className="w-full bg-[#000123] z-10 ">
       <div className="section-container flex h-full flex-col py-12 md:py-16 lg:py-20">
         <div className="flex flex-col items-center text-center">
-          <h1 className="text-6xl font-bold sm:text-7xl md:text-8xl lg:text-[150px]">
+          <h1 className="text-6xl font-bold sm:text-7xl md:text-8xl lg:text-[150px] text-[#A036C5] [text-shadow:0_0_12px_#A036C5]">
             FAQs
           </h1>
         </div>
