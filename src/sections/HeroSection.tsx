@@ -9,11 +9,11 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative min-h-screen w-full overflow-hidden">
+      <section className="relative min-h-dvh w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/50" />
 
         {/* Content */}
-        <div className="section-container relative z-10 flex min-h-screen flex-col px-4 py-8 sm:px-6 sm:py-10 md:py-12">
+        <div className="section-container relative z-10 flex min-h-dvh flex-col px-4 py-8 sm:px-6 sm:py-10 md:py-12">
           <div className="flex flex-1 items-center justify-start text-left">
             <div className="w-full max-w-5xl text-white">
               <h1 className="text-3xl leading-tight font-bold sm:text-5xl md:text-6xl">
