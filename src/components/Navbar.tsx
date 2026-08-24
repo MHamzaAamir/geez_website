@@ -94,7 +94,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-1 flex-col gap-5">
           {links.map((link) => (
             <Link
               key={link.name}
