@@ -77,7 +77,7 @@ export default function Navbar() {
       />
 
       <aside
-        className={`fixed top-0 right-0 z-50 flex h-svh w-[82vw] max-w-90 flex-col bg-[#0D1025] p-6 text-white shadow-2xl transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed top-0 right-0 z-50 flex h-dvh w-[82vw] max-w-90 flex-col bg-[#0D1025] p-6 text-white shadow-2xl transition-transform duration-300 ease-out md:hidden ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!isSidebarOpen}
